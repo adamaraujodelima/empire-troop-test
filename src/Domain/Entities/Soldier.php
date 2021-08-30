@@ -2,6 +2,8 @@
 
 namespace Empire\Domain\Entities;
 
+use Exception;
+
 class Soldier {
     
     private string $name;
@@ -11,10 +13,13 @@ class Soldier {
 
     public function __construct(array $attributes)
     {
-        $this->name = $attributes['name'];
-        $this->age = $attributes['age'];
-        $this->gender = $attributes['gender'];
-        $this->force = $attributes['force'];
+        if(empty($attributes))
+            throw new Exception("The attributes in array it's required. Attributes: name, age, gender and force.", 1);
+            
+        $this->name = $attributes['name'] ?? throw new Exception("The attribute name it's required!", 1);
+        $this->age = $attributes['age'] ?? throw new Exception("The attribute age it's required!", 1);
+        $this->gender = $attributes['gender'] ?? throw new Exception("The attribute gender it's required!", 1);
+        $this->force = $attributes['force'] ?? throw new Exception("The attribute force it's required!", 1);
     }
 
     public function getName()
@@ -24,7 +29,7 @@ class Soldier {
 
     public function getAge()
     {
-        return $this->age;
+        return intval($this->age);
     }
 
     public function getGender()
@@ -34,7 +39,7 @@ class Soldier {
 
     public function getForce()
     {
-        return $this->force;
+        return intval($this->force);
     }
 
 }

@@ -10,12 +10,7 @@ class SpearmanSoldier extends Soldier
 
     public function __construct(array $attributes)
     {
-        parent::__construct([
-            'name' => $attributes['name'],
-            'age' => $attributes['age'],
-            'gender' => $attributes['gender'],
-            'force' => $attributes['force'],
-        ]);
+        parent::__construct($attributes);
     }
 
     public function getSoldier()
@@ -33,5 +28,10 @@ class SpearmanSoldier extends Soldier
     public function getAbility()
     {
         return $this->ability;
+    }
+
+    public function getTypeBattle()
+    {
+        return $this->typeBattle;
     }
 }
