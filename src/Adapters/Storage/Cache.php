@@ -2,10 +2,26 @@
 
 namespace Empire\Adapters\Storage;
 
+use Redis;
+
 class Cache {
 
-    public function store($content)
+    private $redis;
+
+    public function __construct()
     {
-        $hash = md5(json_encode($content)); // Hash of percentage of troops to store in memory and validate if the combination was used in other calls.
+        $this->redis = new Redis();
+        $this->redis->connect('redis', 6379);
+        $this->redis->auth('EmpireRedis2021!');
+    }
+
+    public function get(string $key)
+    {
+        return $this->redis->get($key);
+    }
+
+    public function store(string $key, string $content)
+    {
+        return $this->redis->set($key, $content);
     }
 }
