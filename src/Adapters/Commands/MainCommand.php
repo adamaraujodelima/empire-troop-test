@@ -4,6 +4,8 @@ namespace Empire\Adapters\Commands;
 
 use Empire\Adapters\Repositories\CacheRepository;
 use Empire\Domain\UserCases\TroopUserCase;
+use Empire\Ports\RepositoryInterface;
+use Empire\Ports\TroopUserCaseInterface;
 use Exception;
 
 class MainCommand
@@ -27,12 +29,11 @@ class MainCommand
         $this->args = $args;
     }
 
-    public function run(): void
+    public function run(RepositoryInterface $repository): string
     {
-        $repository = new CacheRepository();
         $troopUserCase = new TroopUserCase($repository);
         $troops = $troopUserCase->mount($this->args[1], $this->args[3]);
-        echo json_encode($troops);
+        return json_encode($troops);
     }
 }
 

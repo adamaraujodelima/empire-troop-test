@@ -7,7 +7,6 @@ use Empire\Domain\Entities\SpearmanSoldier;
 use Empire\Domain\Entities\SwordsmanSoldier;
 use Empire\Domain\Entities\Troop;
 use Empire\Ports\RepositoryInterface;
-
 class TroopUserCase extends MainUserCase{
 
     public function __construct(RepositoryInterface $repository)
@@ -15,7 +14,7 @@ class TroopUserCase extends MainUserCase{
         parent::__construct($repository);   
     }
 
-    public function mount(int $totalSoldiers, int $totalTroops)
+    public function mount(int $totalSoldiers, int $totalTroops): array
     {
         $troopEntity = new Troop($totalSoldiers, $totalTroops);
         $flag = false;
